@@ -40,6 +40,23 @@ class MainViewModel @Inject constructor(
         player.addMediaItem(MediaItem.fromUri(uri))
     }
 
+    fun deleteVideoItem(videoItem: VideoItem) {
+        // Get the current list of video items
+        val currentList = videoItems.value.toMutableList()
+
+        // Find the index of the video item to remove
+        val index = currentList.indexOfFirst { it.contentUri == videoItem.contentUri }
+
+        // If the item was found, remove it from the list and update the saved state
+        if (index != -1) {
+            currentList.removeAt(index)
+            savedStateHandle.set("videoUris", currentList.map { it.contentUri })
+            player.removeMediaItem(index)
+        }
+    }
+
+
+
     fun playVideo(uri: Uri) {
         player.setMediaItem(
             videoItems.value.find { it.contentUri == uri }?.mediaItem ?: return
