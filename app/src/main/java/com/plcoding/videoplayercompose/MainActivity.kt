@@ -110,7 +110,6 @@ class MainActivity : ComponentActivity() {
                             .padding(8.dp)) {
                             Text(text = "Select video", color = Color.White)
                         }
-
 //                        Icon(
 //                            imageVector = Icons.Default.FileOpen,
 //                            contentDescription = "Select video"
